@@ -1,4 +1,4 @@
-import { moves } from "../helpers/MoveHelpers";
+import { moves, Move } from "../helpers/MoveHelpers";
 
 type ControlProps = {
   onPlayer1Move: (move: Move) => void;
