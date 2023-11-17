@@ -30,3 +30,7 @@ export function Result(playerMove: Move, computerMove: Move): string {
   const outcome = outcomes[playerMove]?.[computerMove];
   return outcome ?? "Invalid move!";
 }
+
+export function RandomMove(): Move {
+  return options[Math.floor(Math.random() * options.length)];
+}

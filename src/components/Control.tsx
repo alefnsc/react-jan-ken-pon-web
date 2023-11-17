@@ -1,8 +1,8 @@
 import {
-  ScissorsIcon,
-  DocumentIcon,
-  LifebuoyIcon,
-} from "@heroicons/react/24/solid";
+  FaRegHandRock,
+  FaRegHandPaper,
+  FaRegHandScissors,
+} from "react-icons/fa";
 
 import { Move } from "../helpers/MoveHelpers";
 
@@ -12,15 +12,15 @@ type ControlProps = {
 
 export default function Control({ onPlayer1Move }: ControlProps) {
   return (
-    <div className="border flex flex-row justify-center items-center rounded-md p-6 my-5">
+    <div className="border flex flex-row justify-center items-center rounded-md p-6 my-5 space-x-4 h-full">
       <div onClick={() => onPlayer1Move("rock")}>
-        <LifebuoyIcon className="h-10 w-10 text-gray-900 hover:text-gray-600" />
+        <FaRegHandRock className="w-16 h-16 text-gray-900 hover:text-gray-600" />
       </div>
       <div onClick={() => onPlayer1Move("paper")} className="">
-        <DocumentIcon className="h-10 w-10 text-gray-900  hover:text-gray-600" />
+        <FaRegHandPaper className="w-16 h-16 text-gray-900  hover:text-gray-600" />
       </div>
       <div onClick={() => onPlayer1Move("scissor")} className="">
-        <ScissorsIcon className="h-10 w-10 text-gray-900  hover:text-gray-600" />
+        <FaRegHandScissors className="w-16 h-16 text-gray-900  hover:text-gray-600" />
       </div>
     </div>
   );
