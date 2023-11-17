@@ -31,7 +31,7 @@ export function Instructions({ open, handleClose }: InstructionsProps) {
           <li>Rock beats Scissors.</li>
           <li>Scissors beats Paper.</li>
           <li>Paper beats Rock.</li>
-          <li>Three rounds win the match</li>
+          <li>Win three rounds to win the match.</li>
         </Typography>
 
         <StyledButton onClick={handleClose}>Understood!</StyledButton>
