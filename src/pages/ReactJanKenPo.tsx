@@ -54,6 +54,9 @@ export default function ReactJanKenPo() {
         draggable: true,
         theme: "light",
       });
+      setInterval(() => {
+        setPlayGame(false);
+      }, 2000);
     } else if (score.player2 === 3) {
       setScore({ player1: 0, player2: 0 });
       toast("Oh no, you lose the match!", {
@@ -66,6 +69,9 @@ export default function ReactJanKenPo() {
         draggable: true,
         theme: "light",
       });
+      setInterval(() => {
+        setPlayGame(false);
+      }, 2000);
     }
   }, [score]);
 
