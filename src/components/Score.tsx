@@ -7,11 +7,11 @@ type ScoreProps = {
 
 export const Score = ({ player1Score, player2Score }: ScoreProps) => {
   return (
-    <div className="border p-4 flex-col justify-between items-center rounded-md">
-      <div className="flex justify-center items-center flex-nowrap">
-        <h2 className="text-xl font-bold ">Score</h2>
+    <div className=" control p-4 flex-col justify-between items-center rounded-md shadow-md overflow-x: auto space-x-2">
+      <div className="flex justify-center items-center flex-nowrap mb-2">
+        <h2 className="text-2xl font-bold ">Score</h2>
       </div>
-      <div className="flex justify-between items-center w-full px-16 space-x-6">
+      <div className="flex justify-between items-center w-full flex-wrap">
         <div className="flex justify-center items-center flex-nowrap">
           <FaRegUser className="h-6 w-6 text-blue-500" />
           <p className="mx-2 font-bold">Player 1:</p>

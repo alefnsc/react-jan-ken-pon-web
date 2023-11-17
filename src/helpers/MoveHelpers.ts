@@ -1,10 +1,33 @@
-export type Move = "rock" | "paper" | "scissor";
+import {
+  IconType,
+  FaRegHandRock,
+  FaRegHandPaper,
+  FaRegHandScissors,
+} from "react-icons/fa";
 
-export const options: Move[] = ["rock", "paper", "scissor"];
+export type Move = {
+  value: string;
+  icon: IconType;
+};
+
+export const moves: Move[] = [
+  {
+    value: "rock",
+    icon: FaRegHandRock,
+  },
+  {
+    value: "paper",
+    icon: FaRegHandPaper,
+  },
+  {
+    value: "scissor",
+    icon: FaRegHandScissors,
+  },
+];
 
 export type Outcome = {
-  [key in Move]: {
-    [key in Move]: string;
+  [key in Move["value"]]: {
+    [key in Move["value"]]: string;
   };
 };
 
@@ -27,10 +50,10 @@ export const outcomes: Outcome = {
 };
 
 export function Result(playerMove: Move, computerMove: Move): string {
-  const outcome = outcomes[playerMove]?.[computerMove];
+  const outcome = outcomes[playerMove.value]?.[computerMove.value];
   return outcome ?? "Invalid move!";
 }
 
 export function RandomMove(): Move {
-  return options[Math.floor(Math.random() * options.length)];
+  return moves[Math.floor(Math.random() * moves.length)];
 }

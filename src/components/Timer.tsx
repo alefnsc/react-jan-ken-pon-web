@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-export default function Timer() {
+export function Timer() {
   const RenderTime = ({ remainingTime }: { remainingTime: number }) => {
     const currentTime = useRef<number>(remainingTime);
     const prevTime = useRef(0);

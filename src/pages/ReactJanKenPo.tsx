@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
+
+import { Move, Result, RandomMove } from "../helpers/MoveHelpers";
+
 import { Header } from "../components/Header";
 import { Main } from "../components/Main";
+import { Home } from "../components/Home";
+import { Score } from "../components/Score";
+import { Control } from "../components/Control";
+import { Timer } from "../components/Timer";
+import { GameBoard } from "../components/GameBoard";
+import { Instructions } from "../components/Instructions";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Score } from "../components/Score";
-import Control from "../components/Control";
-import { Move, Result, RandomMove } from "../helpers/MoveHelpers";
-import Timer from "../components/Timer";
 
 export default function ReactJanKenPo() {
   const [player1Win, setPlayer1Win] = useState(false);
@@ -15,13 +21,58 @@ export default function ReactJanKenPo() {
   const [player2Move, setPlayer2Move] = useState<Move | null>(null);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const [timer, setTimer] = useState(false);
-  function handlePlayer1Move(move: Move) {
+  const [playGame, setPlayGame] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handlePlayer1Move = (move: Move) => {
     setPlayer1Move(move);
     setTimer(true);
-  }
+  };
+
+  const handlePlayGame = () => {
+    setPlayGame(true);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
-    if (player1Move) {
+    if (score.player1 === 3) {
+      setScore({ player1: 0, player2: 0 });
+      toast("Whoowoa, you won the match!", {
+        position: "top-center",
+        icon: "🏆",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    } else if (score.player2 === 3) {
+      setScore({ player1: 0, player2: 0 });
+      toast("Oh no, you lose the match!", {
+        position: "top-center",
+        icon: "🚫",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: false,
+        theme: "light",
+      });
+    }
+  }, [score]);
+
+  useEffect(() => {
+    if (player1Move && player1Move.value) {
       const computerMove = RandomMove();
       setPlayer2Move(computerMove);
     }
@@ -46,29 +97,23 @@ export default function ReactJanKenPo() {
 
   useEffect(() => {
     let intervalId: number;
-    if (player1Move && player2Move) {
+    if (player1Move && player1Move.value && player2Move && player2Move.value) {
       const result = Result(player1Move, player2Move);
       setTimer(true);
       intervalId = setInterval(() => {
         if (result === "You win!") {
           setPlayer1Win(true);
           setPlayer2Win(false);
-          setPlayer1Move(null);
-          setPlayer2Move(null);
         } else if (result === "You lose!") {
           setPlayer1Win(false);
           setPlayer2Win(true);
-          setPlayer1Move(null);
-          setPlayer2Move(null);
         } else if (result === "Draw!") {
           setPlayer1Win(false);
           setPlayer2Win(false);
-          setPlayer1Move(null);
-          setPlayer2Move(null);
         }
         toast.info(result, {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: false,
@@ -79,35 +124,70 @@ export default function ReactJanKenPo() {
         setTimer(false);
       }, 3000);
     }
+
     return () => clearInterval(intervalId);
   }, [player1Move, player2Move, setPlayer1Win, setPlayer2Win]);
-  const newTimer = timer ? <Timer /> : null;
-  return (
-    <>
-      <Header> REACT-JAN-KEN-PON</Header>
 
+  useEffect(() => {
+    if (!timer) {
+      const timerIntervalId: number = setInterval(() => {
+        setPlayer1Move(null);
+        setPlayer2Move(null);
+      }, 2000);
+      return () => clearInterval(timerIntervalId);
+    }
+  }, [timer]);
+
+  let maintsx = null;
+
+  if (playGame) {
+    maintsx = (
+      <>
+        <Header> REACT-JAN-KEN-PON</Header>
+        <Main>
+          <>
+            <div className="flex flex-col justify-center items-center rounded-md p-6 my-5">
+              <Score
+                player1Score={score.player1}
+                player2Score={score.player2}
+              />
+              <GameBoard
+                player1Move={player1Move}
+                player2Move={player2Move}
+                timer={timer}
+              >
+                <Timer />
+              </GameBoard>
+              <Control onPlayer1Move={handlePlayer1Move} />
+
+              <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={true}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
+            </div>
+          </>
+        </Main>
+      </>
+    );
+  }
+  if (!playGame) {
+    maintsx = (
       <Main>
-        <div className="flex flex-col justify-center items-center rounded-md p-6 my-5 space-x-4">
-          <Score player1Score={score.player1} player2Score={score.player2} />
-          {/* Game table - There will be a game table to delay computer move and display the result*/}
-          <div className="container game-table border flex flex-row justify-center items-center rounded-md p-6 my-5 space-x-2">
-            {newTimer}
-          </div>
-          <Control onPlayer1Move={handlePlayer1Move} />
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={true}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </div>
+        <>
+          <Home handlePlayGame={handlePlayGame} handleOpen={handleOpen} />
+          <Instructions open={open} handleClose={handleClose} />
+        </>
       </Main>
-    </>
-  );
+    );
+  }
+
+  return maintsx;
 }
