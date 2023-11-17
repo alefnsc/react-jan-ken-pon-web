@@ -52,7 +52,6 @@ export default function ReactJanKenPo() {
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
-        progress: false,
         theme: "light",
       });
     } else if (score.player2 === 3) {
@@ -65,7 +64,6 @@ export default function ReactJanKenPo() {
         closeOnClick: true,
         pauseOnHover: false,
         draggable: true,
-        progress: false,
         theme: "light",
       });
     }
@@ -118,7 +116,6 @@ export default function ReactJanKenPo() {
           closeOnClick: true,
           pauseOnHover: false,
           draggable: true,
-          progress: false,
           theme: "light",
         });
         setTimer(false);
