@@ -1,9 +1,9 @@
 import {
-  IconType,
   FaRegHandRock,
   FaRegHandPaper,
   FaRegHandScissors,
 } from "react-icons/fa";
+import { IconType } from "react-icons/lib";
 
 export type Move = {
   value: string;
