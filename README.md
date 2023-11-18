@@ -20,7 +20,7 @@
 
 ## 1. Overview
 
-This project is a React-based implementation of the classic Jan Ken Pon (Rock, Paper, Scissors) game. It includes features such as a timer for move selection, dynamic display of player and computer moves, game status tracking, and a responsive layout. The project utilizes Heroicons, react-spinners, react-toastify, and Tailwind for styling.
+This project is a React-based implementation of the classic Jan Ken Pon (Rock, Paper, Scissors) game. It includes features such as a timer for move showing, dynamic display of player and computer moves, game status tracking, and a responsive layout. The project utilizes react-icons, react-toastify, and Tailwind for styling.
 
 ## 2. Components
 
