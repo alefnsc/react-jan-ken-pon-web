@@ -11,7 +11,7 @@
 
 # Jan Ken Pon Web App
 
-[Check out the live demo!](https://react-jan-ken-pon-web-afonseca.vercel.app/)
+[Check out the live demo!](https://react-jan-ken-pon-web-afonseca.vercel.app/){:target="_blank"}
 
 ![Home Screen](/src/assets/image.png)
 ![Instructions Modal](/src/assets/image-1.png)
