@@ -1,13 +1,13 @@
 # Table of Contents
 
-1. [Overview](#overview)
-2. [Components](#components)
-3. [Game Logic](#game-logic)
-3. [Additional Features](#additional-features)
-4. [Project Structure](#project-structure)
-5. [Deployment](#deployment)
-6. [How to Run Locally](#how-to-run-locally)
-7. [Contact](#contact)
+1. [Overview](#1-overview)
+2. [Components](#2-components)
+3. [Game Logic](#3-game-logic)
+3. [Additional Features](#4-additional-features)
+4. [Project Structure](#5-project-structure)
+5. [Deployment](#6-deployment)
+6. [How to Run Locally](#7-how-to-run-locally)
+7. [Contact](#8-contact)
 
 # Jan Ken Pon Web App
 
