@@ -24,6 +24,10 @@ export default function ReactJanKenPo() {
   const [playGame, setPlayGame] = useState(false);
   const [open, setOpen] = useState(false);
 
+  function refreshPage() {
+    window.location.reload();
+  }
+
   const handlePlayer1Move = (move: Move) => {
     setPlayer1Move(move);
     setTimer(true);
@@ -41,8 +45,17 @@ export default function ReactJanKenPo() {
     setOpen(false);
   };
 
+  function handleReset() {
+    const scoreInterval = setInterval(() => {
+      setPlayGame(false);
+      refreshPage();
+    }, 2000);
+    return () => clearInterval(scoreInterval);
+  }
+
   useEffect(() => {
     if (score.player1 === 3) {
+      handleReset();
       setScore({ player1: 0, player2: 0 });
       toast("Whoowoa, you won the match!", {
         position: "top-center",
@@ -54,10 +67,8 @@ export default function ReactJanKenPo() {
         draggable: true,
         theme: "light",
       });
-      setInterval(() => {
-        setPlayGame(false);
-      }, 2000);
     } else if (score.player2 === 3) {
+      handleReset();
       setScore({ player1: 0, player2: 0 });
       toast("Oh no, you lose the match!", {
         position: "top-center",
@@ -69,9 +80,6 @@ export default function ReactJanKenPo() {
         draggable: true,
         theme: "light",
       });
-      setInterval(() => {
-        setPlayGame(false);
-      }, 2000);
     }
   }, [score]);
 
